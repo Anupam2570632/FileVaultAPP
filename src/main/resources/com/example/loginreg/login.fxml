@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      style="-fx-background-color: black; -fx-padding: 30; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 4); -fx-max-width: 400; -fx-max-height: 300;">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- Username Field -->
+    <TextField fx:id="emailField" promptText="Enter Your Email here"
+               style="-fx-prompt-text-fill: #BDBDBD; -fx-text-fill: white; -fx-background-color: #1E1E1E; -fx-border-color: #424242; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+
+    <!-- Password Field -->
+    <PasswordField fx:id="passwordField" promptText="Enter Your Password here"
+                   style="-fx-prompt-text-fill: #BDBDBD; -fx-text-fill: white; -fx-background-color: #1E1E1E; -fx-border-color: #424242; -fx-border-radius: 5; -fx-background-radius: 5;"/>
+
+    <!-- Login Button -->
+    <Button fx:id="loginButton" text="Login"
+            style="-fx-background-color: #6F00FF; -fx-text-fill: white; -fx-font-size: 14; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;"/>
+
+    <!-- Register New Account Button -->
+    <Button fx:id="registerButton" text="Register New Account"
+            style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-font-size: 12; -fx-underline: true; -fx-cursor: hand;"/>
+</VBox>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<VBox xmlns="http://javafx.com/javafx/17.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      spacing="10"
+      style="-fx-background-color: black;">
+
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <!-- Top Section -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Category:" textFill="white"/>
+        <ComboBox fx:id="categoryDropdown" promptText="Select Category">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Code"/>
+                    <String fx:value="JSON"/>
+                    <String fx:value="Text"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Validity:" textFill="white"/>
+        <ComboBox fx:id="validityDropdown" promptText="Select Validity">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="1 Month"/>
+                    <String fx:value="1 Year"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Access:" textFill="white"/>
+        <ComboBox fx:id="accessDropdown" promptText="Public/Private">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Public"/>
+                    <String fx:value="Private"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Button fx:id="createFileButton" text="Create File" />
+    </HBox>
+
+    <!-- Code Space Section -->
+    <VBox spacing="5">
+        <Label text="Write your content:" textFill="white"/>
+        <TextArea fx:id="codeSpace" promptText="Write your code, JSON, or text here..." prefRowCount="10" />
+    </VBox>
+
+    <!-- Saved Files Section -->
+    <VBox spacing="5">
+        <Text fx:id="noSavedFileText" text="No saved files" visible="false"  />
+
+        <ListView fx:id="savedFilesList" visible="true">
+            <!-- Placeholder for dynamic content -->
+        </ListView>
+    </VBox>
+</VBox>
