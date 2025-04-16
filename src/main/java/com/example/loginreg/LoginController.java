@@ -93,6 +93,12 @@ public class LoginController {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
             System.out.println("User Login successfully: " + response.body());
+            JSONObject jsonResponse = new JSONObject(response.body());
+            JSONObject userObject = jsonResponse.getJSONObject("user");
+
+            // Directly assign to UserSession without setter
+            UserSession.setUserEmail(userObject.getString("email"));
+            System.out.println(UserSession.getUserEmail());
             Main.showAddFileScene();
         } else if(response.statusCode() == 401) {
             AlertController.showAlert("Information", "Incorrect Password", Alert.AlertType.ERROR);
@@ -102,8 +108,6 @@ public class LoginController {
             System.out.println("Error during Login: " + response.body());
         }
     }
-
-
 
 
     private void handleRegisterNavigation() {

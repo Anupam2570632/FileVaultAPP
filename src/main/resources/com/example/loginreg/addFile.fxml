@@ -51,10 +51,15 @@
         <Button fx:id="createFileButton" text="Create File" />
     </HBox>
 
+    <!-- File Name Section -->
+    <VBox spacing="5">
+        <Label text="Write your File Name:" textFill="white"/>
+        <TextArea fx:id="fileNameBox" promptText="Write your file name here..." prefRowCount="10" />
+    </VBox>
     <!-- Code Space Section -->
     <VBox spacing="5">
         <Label text="Write your content:" textFill="white"/>
-        <TextArea fx:id="codeSpace" promptText="Write your code, JSON, or text here..." prefRowCount="10" />
+        <TextArea fx:id="codeSpace" promptText="Write your code, JSON, or text here..." prefRowCount="20" />
     </VBox>
 
     <!-- Saved Files Section -->
