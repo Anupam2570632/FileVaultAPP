@@ -64,7 +64,7 @@
 
     <!-- Saved Files Section -->
     <VBox spacing="5">
-        <Text fx:id="noSavedFileText" text="No saved files" visible="false"  />
+        <Text fx:id="noSavedFileText" text="No saved files" visible="false" style="-fx-fill: white;"/>
 
         <ListView fx:id="savedFilesList" visible="true">
             <!-- Placeholder for dynamic content -->

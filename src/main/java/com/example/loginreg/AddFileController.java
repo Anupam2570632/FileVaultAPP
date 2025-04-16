@@ -194,7 +194,7 @@ public class AddFileController {
         fileEntry.getChildren().addAll(fileInfoBox, spacer, buttonBox);
 
         // Event handlers
-        seeButton.setOnAction(event -> handleSeeFile(content));
+        seeButton.setOnAction(event -> handleSeeFile(id));
         editButton.setOnAction(event -> handleEditFile(id));
         copyButton.setOnAction(event -> handleCopyFile(content));
         downloadButton.setOnAction(event -> handleDownloadFile(fileName, content));
@@ -205,8 +205,9 @@ public class AddFileController {
     }
 
 
-    private void handleSeeFile(String content) {
-        showAlert("File Content", content, Alert.AlertType.INFORMATION);
+    private void handleSeeFile(String id) {
+        UserSession.setViewFileId(id);
+        Main.showViewFileScene();
     }
 
     private void handleEditFile(String id) {
@@ -267,6 +268,7 @@ public class AddFileController {
                                         return label.getText().replace("📄 ", "").equals(id);
                                     });
                                     updateSavedFilesUI();
+                                    Main.showAddFileScene();
                                     showAlert("Delete Success", "File deleted from server.", Alert.AlertType.INFORMATION);
                                 });
                             } else if (response.statusCode() == 404) {

@@ -10,6 +10,7 @@
 
     <!-- Back Button -->
     <Button text="← Back"
+            fx:id="backButton"
             style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 14;"
             maxWidth="100"/>
 

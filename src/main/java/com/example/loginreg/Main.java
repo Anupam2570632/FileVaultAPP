@@ -26,6 +26,7 @@ public class Main extends Application {
         welcomeController = new WelcomeController();
         addFileController = new AddFileController();
         updateFileController = new UpdateFileController();
+        viewFileController = new ViewFileController();
 
         // Show login scene initially
         showLoginScene();
@@ -59,7 +60,7 @@ public class Main extends Application {
     public static void showAddFileScene() {
         VBox addFileView = addFileController.getView();
         if (addFileView != null) {
-            Scene scene = new Scene(addFileView, 600, 400);
+            Scene scene = new Scene(addFileView, 700, 500);
             primaryStage.setScene(scene);
         }
     }
