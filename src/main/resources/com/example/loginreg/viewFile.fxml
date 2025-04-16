@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+      spacing="10" style="-fx-padding: 20; -fx-background-color: #2e2e2e;">
+
+    <!-- Back Button -->
+    <Button text="← Back"
+            style="-fx-background-color: #444; -fx-text-fill: white; -fx-font-size: 14;"
+            maxWidth="100"/>
+
+    <!-- File Name Label -->
+    <Label fx:id="fileNameLabel"
+           text="File Name"
+           style="-fx-text-fill: white; -fx-font-size: 16; -fx-font-weight: bold;"/>
+
+    <!-- File Content TextArea -->
+    <TextArea fx:id="fileContentArea"
+              editable="false"
+              wrapText="true"
+              style="-fx-control-inner-background: #1e1e1e;
+                     -fx-text-fill: white;
+                     -fx-font-family: monospace;
+                     -fx-font-size: 14;"
+              VBox.vgrow="ALWAYS" />
+</VBox>

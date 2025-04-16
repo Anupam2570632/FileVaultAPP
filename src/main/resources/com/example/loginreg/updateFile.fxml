@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<VBox xmlns="http://javafx.com/javafx/17.0.1"
+                                 xmlns:fx="http://javafx.com/fxml/1"
+                                 spacing="10"
+                                 style="-fx-background-color: black;">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <!-- Display Section -->
+    <VBox spacing="10">
+        <Label text="File Name:" textFill="white" />
+        <TextField fx:id="fileNameText" promptText="Enter file name" style="-fx-text-fill: black; -fx-font-size: 14px;" />
+
+        <Label text="Category:" textFill="white" />
+        <ComboBox fx:id="categoryDropdown" promptText="Select Category" editable="true"/>
+
+        <Label text="Validity:" textFill="white" />
+        <ComboBox fx:id="validityDropdown" promptText="Select Validity" editable="true"/>
+
+        <Label text="Access:" textFill="white" />
+        <ComboBox fx:id="accessDropdown" promptText="Public/Private" editable="true"/>
+
+        <Label text="File Content:" textFill="white" />
+        <TextArea fx:id="fileContentArea"
+                  editable="true"
+                  wrapText="true"
+                  prefRowCount="30"
+                  style="-fx-control-inner-background: #1e1e1e; -fx-text-fill: white; -fx-font-family: monospace;" />
+    </VBox>
+
+    <!-- Button Section -->
+    <HBox alignment="CENTER_RIGHT" spacing="10">
+        <Button fx:id="updateButton" text="Update" />
+        <Button fx:id="backButton" text="Back to Add File" />
+    </HBox>
+</VBox>

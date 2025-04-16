@@ -164,7 +164,7 @@ public class AddFileController {
         fileEntry.setStyle("-fx-padding: 10px; -fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
 
         Label fileNameLabel = new Label("📄 " + fileName);
-        fileNameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+        fileNameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #000000;");
 
         String previewContent = content.length() > 30 ? content.substring(0, 30) + "..." : content;
         Label previewLabel = new Label(previewContent);
@@ -195,7 +195,7 @@ public class AddFileController {
 
         // Event handlers
         seeButton.setOnAction(event -> handleSeeFile(content));
-        editButton.setOnAction(event -> handleEditFile(fileName, content));
+        editButton.setOnAction(event -> handleEditFile(id));
         copyButton.setOnAction(event -> handleCopyFile(content));
         downloadButton.setOnAction(event -> handleDownloadFile(fileName, content));
         deleteButton.setOnAction(event -> handleDeleteFile(id));
@@ -209,9 +209,9 @@ public class AddFileController {
         showAlert("File Content", content, Alert.AlertType.INFORMATION);
     }
 
-    private void handleEditFile(String fileName, String content) {
-        codeSpace.setText(content);
-        showAlert("Edit File", "Editing file: " + fileName, Alert.AlertType.INFORMATION);
+    private void handleEditFile(String id) {
+        UserSession.setUpdateId(id);
+        Main.showUpdateFIleScene();
     }
 
     private void handleCopyFile(String content) {
@@ -249,7 +249,7 @@ public class AddFileController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
             // API URL
-            String url = "http://localhost:3000/file/" + id;
+            String url = "http://localhost:3000/delete-file/" + id;
 
             try {
                 HttpClient client = HttpClient.newHttpClient();

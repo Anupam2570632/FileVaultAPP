@@ -12,17 +12,20 @@ public class Main extends Application {
     private static RegisterController registerController;
     private static WelcomeController welcomeController;
     private static AddFileController addFileController;
+    private static UpdateFileController updateFileController;
+    private static ViewFileController viewFileController;
 
     @Override
     public void start(Stage stage) {
         primaryStage = stage;
-        primaryStage.setTitle("JavaFX Login Application");
+        primaryStage.setTitle("JavaFX Application");
 
         // Initialize controllers
         loginController = new LoginController();
         registerController = new RegisterController();
         welcomeController = new WelcomeController();
         addFileController = new AddFileController();
+        updateFileController = new UpdateFileController();
 
         // Show login scene initially
         showLoginScene();
@@ -57,6 +60,21 @@ public class Main extends Application {
         VBox addFileView = addFileController.getView();
         if (addFileView != null) {
             Scene scene = new Scene(addFileView, 600, 400);
+            primaryStage.setScene(scene);
+        }
+    }
+    public static void showUpdateFIleScene() {
+        VBox updateFileView = updateFileController.getView();
+        if (updateFileView != null) {
+            Scene scene = new Scene(updateFileView, 600, 600);
+            primaryStage.setScene(scene);
+        }
+    }
+
+    public static void showViewFileScene(){
+        VBox viewFile = viewFileController.getView();
+        if(viewFile != null){
+            Scene scene = new Scene(viewFile, 600, 600);
             primaryStage.setScene(scene);
         }
     }
