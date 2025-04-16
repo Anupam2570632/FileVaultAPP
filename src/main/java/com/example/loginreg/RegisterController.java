@@ -107,7 +107,7 @@ public class RegisterController {
 
         // Build HttpRequest
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:3000/user")) // Replace with your API endpoint
+                .uri(URI.create("https://file-vault-server-eight.vercel.app/user")) // Replace with your API endpoint
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonObject.toString()))
                 .build();

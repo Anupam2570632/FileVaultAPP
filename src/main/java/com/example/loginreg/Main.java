@@ -67,7 +67,7 @@ public class Main extends Application {
     public static void showUpdateFIleScene() {
         VBox updateFileView = updateFileController.getView();
         if (updateFileView != null) {
-            Scene scene = new Scene(updateFileView, 600, 600);
+            Scene scene = new Scene(updateFileView, 700, 500);
             primaryStage.setScene(scene);
         }
     }
@@ -75,7 +75,7 @@ public class Main extends Application {
     public static void showViewFileScene(){
         VBox viewFile = viewFileController.getView();
         if(viewFile != null){
-            Scene scene = new Scene(viewFile, 600, 600);
+            Scene scene = new Scene(viewFile, 700, 500);
             primaryStage.setScene(scene);
         }
     }

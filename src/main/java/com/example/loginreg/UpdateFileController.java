@@ -2,10 +2,7 @@ package com.example.loginreg;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
@@ -20,6 +17,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.loginreg.AlertController.showAlert;
 
 public class UpdateFileController {
 
@@ -80,7 +79,7 @@ public class UpdateFileController {
 
     private void fetchFileData() {
         String fileId = UserSession.getUpdateId();
-        String url = "http://localhost:3000/file/" + fileId;
+        String url = "https://file-vault-server-eight.vercel.app/file/" + fileId;
 
         try {
             HttpClient client = HttpClient.newHttpClient();
@@ -137,13 +136,9 @@ public class UpdateFileController {
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(updatedFile);
 
-            // Print JSON to console
-            System.out.println("Updated File Data as JSON:");
-            System.out.println(json);
-
             // Get the file ID from session
             String _id = UserSession.getUpdateId();
-            String url = "http://localhost:3000/update-file/" + _id;
+            String url = "https://file-vault-server-eight.vercel.app/update-file/" + _id;
 
             // Create HTTP client and PUT request
             HttpClient client = HttpClient.newHttpClient();
@@ -160,6 +155,7 @@ public class UpdateFileController {
 
             if (response.statusCode() == 200) {
                 Main.showAddFileScene();
+                showAlert("File Updated.", "File Updated successfully!",  Alert.AlertType.CONFIRMATION);
             }
 
         } catch (Exception e) {

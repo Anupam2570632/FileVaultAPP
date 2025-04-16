@@ -57,7 +57,7 @@ public class ViewFileController {
     private void getFileData() {
         try {
             String id = UserSession.getViewFileId(); // get file id from session
-            String url = "http://localhost:3000/file/" + id;
+            String url = "https://file-vault-server-eight.vercel.app/file/" + id;
 
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()

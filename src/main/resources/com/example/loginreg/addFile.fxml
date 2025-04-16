@@ -54,19 +54,42 @@
     <!-- File Name Section -->
     <VBox spacing="5">
         <Label text="Write your File Name:" textFill="white"/>
-        <TextArea fx:id="fileNameBox" promptText="Write your file name here..." prefRowCount="10" />
+        <TextArea fx:id="fileNameBox" promptText="Write your file name here..." prefRowCount="5"
+                  style="-fx-control-inner-background: #1e1e1e;
+                     -fx-text-fill: white;
+                     -fx-font-family: monospace;
+                     -fx-font-size: 14;
+                     -fx-prompt-text-fill: white;"
+        />
     </VBox>
     <!-- Code Space Section -->
     <VBox spacing="5">
         <Label text="Write your content:" textFill="white"/>
-        <TextArea fx:id="codeSpace" promptText="Write your code, JSON, or text here..." prefRowCount="20" />
+        <TextArea fx:id="codeSpace" promptText="Write your code, JSON, or text here..." prefRowCount="20"
+                  style="-fx-control-inner-background: #1e1e1e;
+                     -fx-text-fill: white;
+                     -fx-font-family: monospace;
+                     -fx-font-size: 14;
+                     -fx-prompt-text-fill: white;"
+        />
     </VBox>
 
+    <!-- 🔍 Title Search Section (without icon) -->
+    <HBox spacing="5" alignment="CENTER_LEFT">
+        <TextArea fx:id="fileNameSearchBox" promptText="Search by fileName..." prefRowCount="1" prefHeight="30"
+                  style="-fx-control-inner-background: #1e1e1e;
+                 -fx-text-fill: white;
+                 -fx-font-family: monospace;
+                 -fx-font-size: 14;
+                 -fx-prompt-text-fill: white;" />
+    </HBox>
+
+
     <!-- Saved Files Section -->
-    <VBox spacing="5">
+    <VBox spacing="5" style="-fx-background-color: transparent;">
         <Text fx:id="noSavedFileText" text="No saved files" visible="false" style="-fx-fill: white;"/>
 
-        <ListView fx:id="savedFilesList" visible="true">
+        <ListView fx:id="savedFilesList" visible="true" >
             <!-- Placeholder for dynamic content -->
         </ListView>
     </VBox>

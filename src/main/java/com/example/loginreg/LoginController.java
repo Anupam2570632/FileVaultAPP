@@ -79,7 +79,7 @@ public class LoginController {
     private void sentGetRequest(String email, String password) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
-        String url = String.format("http://localhost:3000/user?email=%s&passcode=%s",
+        String url = String.format("https://file-vault-server-eight.vercel.app/user?email=%s&passcode=%s",
                 URLEncoder.encode(email, StandardCharsets.UTF_8),
                 URLEncoder.encode(password, StandardCharsets.UTF_8));
 

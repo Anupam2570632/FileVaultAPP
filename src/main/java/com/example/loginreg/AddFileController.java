@@ -43,6 +43,9 @@ public class AddFileController {
     private TextArea fileNameBox;
 
     @FXML
+    private TextArea fileNameSearchBox;
+
+    @FXML
     private Text noSavedFileText;
 
     @FXML
@@ -73,6 +76,10 @@ public class AddFileController {
         loadSavedFiles();
 
         createFileButton.setOnAction(event -> handleCreateFile());
+        fileNameSearchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterSavedFiles(newValue);
+        });
+
     }
 
     private void handleCreateFile() {
@@ -99,7 +106,7 @@ public class AddFileController {
             HttpClient client = HttpClient.newHttpClient();
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:3000/file"))
+                    .uri(URI.create("https://file-vault-server-eight.vercel.app/file"))
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonObject.toString()))
                     .build();
@@ -107,9 +114,9 @@ public class AddFileController {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 201) {
-                System.out.println("File Saved Successfully: " + response.body());
                 codeSpace.clear();
                 fileNameBox.clear();
+                showAlert("File saved.", "File added successfully!",  Alert.AlertType.CONFIRMATION);
                 loadSavedFiles(); // Reload files after saving
             } else {
                 System.out.println("Error during saving file: " + response.body());
@@ -126,7 +133,7 @@ public class AddFileController {
             HttpClient client = HttpClient.newHttpClient();
 
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:3000/file?email=" + email))
+                    .uri(URI.create("https://file-vault-server-eight.vercel.app/file?email=" + email))
                     .GET()
                     .build();
 
@@ -147,10 +154,11 @@ public class AddFileController {
                     String id = file.optString("_id");
                     String fileName = file.optString("fileName", "Untitled");
                     String content = file.optString("content", "");
-                    addSavedFile(id, fileName, content);
+                    String category = file.optString("category");
+                    addSavedFile(id, fileName, content, category);
                 }
             } else {
-                System.out.println("Failed to load files: " + response.body());
+                showAlert("File saved.", "Failed to load files!",  Alert.AlertType.ERROR);
             }
 
             updateSavedFilesUI();
@@ -158,8 +166,7 @@ public class AddFileController {
             e.printStackTrace();
         }
     }
-
-    private void addSavedFile(String id, String fileName, String content) {
+    private void addSavedFile(String id, String fileName, String content, String category) {
         HBox fileEntry = new HBox(20);
         fileEntry.setStyle("-fx-padding: 10px; -fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-radius: 5px; -fx-background-radius: 5px;");
 
@@ -172,7 +179,20 @@ public class AddFileController {
 
         VBox fileInfoBox = new VBox(5, fileNameLabel, previewLabel);
 
-        // Spacer to push buttons to right
+        // ✅ Outline Category Button
+        Button categoryButton = new Button(category);
+        categoryButton.setStyle("""
+        -fx-background-color: transparent;
+        -fx-border-color: #2196F3;
+        -fx-text-fill: #2196F3;
+        -fx-border-radius: 5;
+        -fx-padding: 2 8;
+        -fx-font-size: 12px;
+    """);
+
+        fileInfoBox.getChildren().add(categoryButton); // ➕ Add the button under the filename/preview
+
+        // Spacer
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
@@ -250,7 +270,7 @@ public class AddFileController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
 
             // API URL
-            String url = "http://localhost:3000/delete-file/" + id;
+            String url = "https://file-vault-server-eight.vercel.app/delete-file/" + id;
 
             try {
                 HttpClient client = HttpClient.newHttpClient();
@@ -302,4 +322,28 @@ public class AddFileController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private void filterSavedFiles(String keyword) {
+        if (keyword == null || keyword.isEmpty()) {
+            savedFilesList.setItems(savedFiles); // সব দেখাও
+            updateSavedFilesUI();
+            return;
+        }
+
+        ObservableList<HBox> filteredFiles = FXCollections.observableArrayList();
+
+        for (HBox fileEntry : savedFiles) {
+            VBox fileInfoBox = (VBox) fileEntry.getChildren().get(0);
+            Label fileNameLabel = (Label) fileInfoBox.getChildren().get(0);
+            String fileName = fileNameLabel.getText().replace("📄 ", "").toLowerCase();
+
+            if (fileName.contains(keyword.toLowerCase())) {
+                filteredFiles.add(fileEntry);
+            }
+        }
+
+        savedFilesList.setItems(filteredFiles);
+        updateSavedFilesUI();
+    }
+
 }
